@@ -18,16 +18,18 @@ import servlets.base.BaseProducts;
 @WebServlet("/adicionar-lista-compras")
 public class ListaDeComprasClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
+		response.setContentType("text/html");
+
 		BaseClients baseClients = BaseClients.getInstance();
 		BaseProducts baseProducts = BaseProducts.getInstance();
-		
+
 		List<Cliente> clientes = baseClients.listarClientes();
 		List<Produto> produtos = baseProducts.listarProdutos();
-		
+
+		out.println("<html><body><h2>");
 		try {
 			Cliente cliente = clientes.get(Integer.valueOf(request.getParameter("id-cliente")) - 1);		
 			try {
@@ -39,8 +41,10 @@ public class ListaDeComprasClienteServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			out.println("Cliente não encontrado");
+		} finally {
+			out.append("</h2></body></html>");
 		}
-		
+
 	}
 
 }

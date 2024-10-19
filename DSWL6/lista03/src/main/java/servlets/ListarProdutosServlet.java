@@ -21,10 +21,10 @@ public class ListarProdutosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
+
 		BaseProducts baseProducts = BaseProducts.getInstance();
 		List<Produto> produtos = baseProducts.listarProdutos();
-		
+
 		if (produtos != null && !produtos.isEmpty()) {
 			out.println("<html><body>");
 			out.println("<h2>Lista de Produtos</h2>");
@@ -46,7 +46,7 @@ public class ListarProdutosServlet extends HttpServlet {
 			out.println("<h2>Não há produtos cadastrados.</h2>");
 			out.println("</body></html>");
 		}
-		
+
 		out.close();
 	}
 

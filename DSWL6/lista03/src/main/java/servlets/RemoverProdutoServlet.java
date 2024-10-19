@@ -19,9 +19,12 @@ public class RemoverProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+
 		BaseProducts baseProducts = BaseProducts.getInstance();
 		List<Produto> produtos = baseProducts.listarProdutos();
 		
+		out.println("<html><body><h2>");
 		try {
 			Produto p = produtos.get(Integer.valueOf(request.getParameter("id-produto")) - 1);
 			if(produtos.remove(p)) {
@@ -31,6 +34,8 @@ public class RemoverProdutoServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			out.println("Produto não encontrado");
+		} finally {
+			out.append("</h2></body></html>");
 		}
 	}
 

@@ -17,14 +17,16 @@ import servlets.base.BaseProducts;
 @WebServlet("/adicionar-produto")
 public class AdicionarProdutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+
 		BaseProducts baseProducts = BaseProducts.getInstance();
 		List<Produto> produtos = baseProducts.listarProdutos();
-		
+
 		produtos.add(new Produto(request.getParameter("nome"), new BigDecimal(request.getParameter("preco")), (produtos.size() + 1)));
-		
-		response.getWriter().println("Produto adicionado com sucesso!");
+
+		response.getWriter().println("<html><body><h2>Produto adicionado com sucesso!</h2></body></html>");
 	} 
 
 }

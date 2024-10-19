@@ -30,6 +30,7 @@ public class RemoverProdutoClienteServlet extends HttpServlet {
 		List<Cliente> clientes = baseClients.listarClientes();
 		List<Produto> produtos = baseProducts.listarProdutos();
 		
+		out.println("<html><body><h2>");
 		try {
 			Cliente cliente = clientes.get(Integer.valueOf(request.getParameter("id-cliente")) - 1);		
 			try {
@@ -41,6 +42,8 @@ public class RemoverProdutoClienteServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			out.println("Cliente não encontrado");
+		} finally {
+			out.append("</h2></body></html>");
 		}
 		
 	}

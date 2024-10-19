@@ -19,10 +19,13 @@ public class RemoverClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+
 		BaseClients baseClients = BaseClients.getInstance();
 		List<Cliente> clientes = baseClients.listarClientes();
 		 
+		out.println("<html><body><h2>");
 		try {
 			Cliente c = clientes.get(Integer.valueOf(request.getParameter("id-cliente")) - 1);
 			if(clientes.remove(c)) {
@@ -32,6 +35,8 @@ public class RemoverClienteServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			out.println("Cliente não encontrado");
+		} finally {
+			out.append("</h2></body></html>");
 		}
 	}
 

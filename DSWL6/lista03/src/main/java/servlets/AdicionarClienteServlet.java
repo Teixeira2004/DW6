@@ -15,19 +15,20 @@ import servlets.base.BaseClients;
 @WebServlet("/adicionar-cliente")
 public class AdicionarClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		
-		BaseClients baseClients = BaseClients.getInstance();
-        List<Cliente> clientes = baseClients.listarClientes();
-        
-        int clienteId = clientes.size() + 1;
 
-        Cliente cliente = new Cliente(nome, clienteId);
-        clientes.add(cliente);
-        
-        response.getWriter().println("Cliente adicionado com sucesso!");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String nome = request.getParameter("nome");
+
+		BaseClients baseClients = BaseClients.getInstance();
+		List<Cliente> clientes = baseClients.listarClientes();
+
+		int clienteId = clientes.size() + 1;
+
+		Cliente cliente = new Cliente(nome, clienteId);
+		clientes.add(cliente);
+
+		response.getWriter().println("<html><body><h2>Cliente adicionado com sucesso!</h2></body></html>");
 	}
 
 }
